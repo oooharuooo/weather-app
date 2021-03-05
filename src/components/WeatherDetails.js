@@ -2,30 +2,32 @@ import React from "react";
 
 import KtoFConverter from "../helper/KtoFConverter";
 
+import { Box, Typography, Paper } from "@material-ui/core/";
+
+const iconURL = "http://openweathermap.org/img/wn/";
+
 const WeatherDetails = ({ details }) => {
-	const {
-		city,
-		country,
-		weather,
-		description,
-		temp,
-		temp_min,
-		temp_max,
-	} = details;
+	const { city, country, weather, temp, icon } = details;
 
 	return (
-		<>
-			<h1>
-				{city},{country}
-			</h1>
-			<h3>{KtoFConverter(temp)}°F</h3>
-			<h4>
-				Min:{KtoFConverter(temp_min)}°F Max:
-				{KtoFConverter(temp_max)}°F
-			</h4>
-			<h3>{weather}</h3>
-			<h3>{description}</h3>
-		</>
+		<Paper elevation={3} style={{ height: "35vh" }}>
+			<Box
+				display="flex"
+				flexDirection="column"
+				alignItems="center"
+				height="100%"
+				justifyContent="space-evenly"
+			>
+				<Typography variant="h4" color="primary">
+					{city},{country}
+				</Typography>
+				<Typography variant="h5" color="primary">
+					{KtoFConverter(temp)}°F
+				</Typography>
+
+				<img src={`http://openweathermap.org/img/wn/${icon}.png`} alt="weatherIcon" />
+			</Box>
+		</Paper>
 	);
 };
 
