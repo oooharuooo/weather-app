@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 
 const api = {
-	url: "https://api.openweathermap.org/data/2.5/weather?q=",
+	url: "http://api.openweathermap.org/data/2.5/weather?q=",
 	id: "&APPID=fdb99a80ed033a1adc4e1e125b88efa7",
 };
 
