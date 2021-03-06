@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 
 const api = {
-	url: "http://api.openweathermap.org/data/2.5/weather?q=",
+	url: "https://api.openweathermap.org/data/2.5/weather?q=",
 	id: "&APPID=fdb99a80ed033a1adc4e1e125b88efa7",
 };
 
@@ -80,9 +80,11 @@ const Weather = ({ darkState, setDarkState }) => {
 							<DarkMode darkState={darkState} setDarkState={setDarkState} />
 						</Box>
 						<SearchBar setQuery={setQuery} />
-						<Typography variant="h6" color="secondary">
-							{error}
-						</Typography>
+						<Box textAlign="center">
+							<Typography variant="h6" color="secondary">
+								{error}
+							</Typography>
+						</Box>
 						<WeatherDetails details={weatherData} />
 					</>
 				)}
