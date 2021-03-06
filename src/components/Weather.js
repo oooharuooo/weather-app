@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import WeatherDetails from "./WeatherDetails";
 import SearchBar from "./SearchBar";
+import DarkMode from "./DarkMode";
 
 import axios from "axios";
 
@@ -10,21 +11,23 @@ import {
 	Typography,
 	Box,
 	CircularProgress,
+	Paper,
+	Switch,
 } from "@material-ui/core";
-import Brightness4Icon from "@material-ui/icons/Brightness4";
 
 const api = {
 	url: "http://api.openweathermap.org/data/2.5/weather?q=",
 	id: "&APPID=fdb99a80ed033a1adc4e1e125b88efa7",
 };
 
-const Weather = () => {
+const Weather = ({ darkState, setDarkState }) => {
 	const [weatherData, setWeatherData] = useState({});
-	const [error,setError] = useState("");
 	const [query, setQuery] = useState("San Diego");
+	const [error, setError] = useState("");
 
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
+	// Fetching Data
 	const fetchData = useCallback(async () => {
 		try {
 			const {
@@ -37,10 +40,11 @@ const Weather = () => {
 				country: sys.country,
 				city: name,
 			};
+
 			setWeatherData(renamedData);
 			setIsLoading(false);
 		} catch (e) {
-	console.error(e);
+			setError("Please input valid location!");
 		}
 	}, [query]);
 
@@ -48,6 +52,10 @@ const Weather = () => {
 		fetchData();
 	}, [fetchData]);
 
+	// Show Error
+	useEffect(() => {
+		setTimeout(() => setError(""), 3000);
+	});
 	return (
 		<Container maxWidth="sm">
 			<Box
@@ -64,28 +72,17 @@ const Weather = () => {
 				) : (
 					<>
 						<Box display="flex" flexDirection="row">
-							<Box flexGrow={1}>
+							<Box flexGrow={1} textAlign="center">
 								<Typography variant="h1" color="primary">
 									Weather's App
 								</Typography>
 							</Box>
-
-							<Button
-								variant="contained"
-								style={{
-									background:
-										"linear-gradient(to right, #f3e0e0 40%, #423d3d 50%)",
-									maxHeight: "40px",
-								}}
-							>
-								<Brightness4Icon
-									fontSize="default"
-									style={{ color: "white" }}
-								/>
-							</Button>
+							<DarkMode darkState={darkState} setDarkState={setDarkState} />
 						</Box>
-							<SearchBar setQuery={setQuery} />
-							<h1>{weatherData && error}</h1>
+						<SearchBar setQuery={setQuery} />
+						<Typography variant="h6" color="secondary">
+							{error}
+						</Typography>
 						<WeatherDetails details={weatherData} />
 					</>
 				)}

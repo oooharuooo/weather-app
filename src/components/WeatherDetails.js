@@ -4,7 +4,6 @@ import KtoFConverter from "../helper/KtoFConverter";
 
 import { Box, Typography, Paper } from "@material-ui/core/";
 
-const iconURL = "http://openweathermap.org/img/wn/";
 
 const WeatherDetails = ({ details }) => {
 	const { city, country, weather, temp, icon } = details;
@@ -22,10 +21,14 @@ const WeatherDetails = ({ details }) => {
 					{city},{country}
 				</Typography>
 				<Typography variant="h5" color="primary">
-					{KtoFConverter(temp)}°F
+					{KtoFConverter(temp)}°F { weather}
 				</Typography>
 
-				<img src={`http://openweathermap.org/img/wn/${icon}.png`} alt="weatherIcon" />
+				<img
+					src={`http://openweathermap.org/img/wn/${icon}.png`}
+					alt="weatherIcon"
+					style={{ backgroundColor: "#f4709b",borderRadius: "25px"}}
+				/>
 			</Box>
 		</Paper>
 	);

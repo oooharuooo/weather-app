@@ -15,30 +15,30 @@ const SearchBar = ({ setQuery }) => {
 
 	return (
 		<Box>
-		<form onSubmit={searchHandler}>
-			<Box display="flex" justifyContent="center">
-				<TextField
-					id="filled-basic"
-					label="Location"
-					variant="outlined"
-					InputProps={{
-						startAdornment: (
-							<InputAdornment position="start">
-								<LocationCityIcon color="action" />
-							</InputAdornment>
-						),
-					}}
-					name="searchTerm"
-					value={searchTerm}
-					onChange={(e) => setSearchTerm(e.target.value)}
+			<form onSubmit={searchHandler}>
+				<Box display="flex" justifyContent="center">
+					<TextField
+						id="filled-basic"
+						label="Location"
+						variant="outlined"
+						color="secondary"
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<LocationCityIcon color="action" />
+								</InputAdornment>
+							),
+						}}
+						name="searchTerm"
+						value={searchTerm}
+						onChange={(e) => setSearchTerm(e.target.value)}
 					/>
-				<Button color="primary" variant="contained" onClick={searchHandler}>
-					Search
-				</Button>
+					<Button color="primary" variant="contained" onClick={searchHandler}>
+						Search
+					</Button>
 				</Box>
 			</form>
 		</Box>
-
 	);
 };
 
