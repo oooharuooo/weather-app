@@ -20,6 +20,9 @@ function App() {
 		},
 		palette: {
 			type: darkState ? "dark" : "light",
+			primary: {
+				main: darkState ? "#1fbd23" : "#3964b1",
+			},
 		},
 	});
 

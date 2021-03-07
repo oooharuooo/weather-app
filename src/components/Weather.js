@@ -7,12 +7,9 @@ import axios from "axios";
 
 import {
 	Container,
-	Button,
 	Typography,
 	Box,
 	CircularProgress,
-	Paper,
-	Switch,
 } from "@material-ui/core";
 
 const api = {
@@ -54,10 +51,10 @@ const Weather = ({ darkState, setDarkState }) => {
 
 	// Show Error
 	useEffect(() => {
-		setTimeout(() => setError(""), 3000);
-	});
+		setTimeout(() => setError(""), 2000);
+	}, [error]);
 	return (
-		<Container maxWidth="sm">
+		<Container maxWidth="sm" >
 			<Box
 				height="70vh"
 				display="flex"
@@ -85,6 +82,7 @@ const Weather = ({ darkState, setDarkState }) => {
 								{error}
 							</Typography>
 						</Box>
+
 						<WeatherDetails details={weatherData} />
 					</>
 				)}
