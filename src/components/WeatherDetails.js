@@ -1,12 +1,11 @@
 import React from "react";
 
 import KtoFConverter from "../helper/KtoFConverter";
-import backgroundGenerator from "../helper/backgroundGenerator"
+import backgroundGenerator from "../helper/backgroundGenerator";
 
 import { Box, Typography, Paper } from "@material-ui/core/";
 import ".././App.css";
-import images from ".././img/index"
-
+import images from ".././img/index";
 
 const WeatherDetails = ({ details }) => {
 	const { city, country, weather, temp, icon } = details;
@@ -16,11 +15,10 @@ const WeatherDetails = ({ details }) => {
 			elevation={3}
 			style={{
 				height: "35vh",
-				backgroundImage: `url(${backgroundGenerator(weather,images)})`,
+				backgroundImage: `url(${backgroundGenerator(weather, images)})`,
 				backgroundSize: "cover",
 			}}
 		>
-			
 			<Box
 				display="flex"
 				flexDirection="column"

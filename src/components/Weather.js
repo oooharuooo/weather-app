@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import WeatherDetails from "./WeatherDetails";
+import ForeCastDetail from "./ForeCastDetail";
 import SearchBar from "./SearchBar";
 import DarkMode from "./DarkMode";
 
@@ -13,12 +14,15 @@ import {
 } from "@material-ui/core";
 
 const api = {
-	url: "https://api.openweathermap.org/data/2.5/weather?q=",
+	url: "https://api.openweathermap.org/data/2.5/",
 	id: "&APPID=fdb99a80ed033a1adc4e1e125b88efa7",
+	q1: "weather",
+	q2: "forecast",
 };
 
 const Weather = ({ darkState, setDarkState }) => {
 	const [weatherData, setWeatherData] = useState({});
+	const [forecastData, setForecastData] = useState({});
 	const [query, setQuery] = useState("San Diego");
 	const [error, setError] = useState("");
 
@@ -27,9 +31,22 @@ const Weather = ({ darkState, setDarkState }) => {
 	// Fetching Data
 	const fetchData = useCallback(async () => {
 		try {
+			// Weather Data
 			const {
 				data: { weather, main, sys, name },
-			} = await axios.get(`${api.url}${query}${api.id}`);
+			} = await axios.get(`${api.url}${api.q1}?q=${query}${api.id}`);
+
+			// ForeCast Data
+			const {
+				data: { list },
+			} = await axios.get(`${api.url}${api.q2}?q=${query}${api.id}`);
+
+			// Get 5 days from 40 days array of ForeCast Data
+			let forecastData = [];
+			for (let i = 0; i < list.length; i += 8) {
+				forecastData.push(list[i]);
+			}
+			// rename weather Data
 			const renamedData = {
 				weather: weather[0].main,
 				icon: weather[0].icon,
@@ -37,8 +54,8 @@ const Weather = ({ darkState, setDarkState }) => {
 				country: sys.country,
 				city: name,
 			};
-
 			setWeatherData(renamedData);
+			setForecastData(forecastData);
 			setIsLoading(false);
 		} catch (e) {
 			setError("Please input valid location!");
@@ -53,14 +70,16 @@ const Weather = ({ darkState, setDarkState }) => {
 	useEffect(() => {
 		setTimeout(() => setError(""), 2000);
 	}, [error]);
+
 	return (
-		<Container maxWidth="sm" >
+		<Container maxWidth="md">
 			<Box
-				height="70vh"
+				height="90vh"
 				display="flex"
 				flexDirection="column"
 				borderRadius="50%"
 				justifyContent="space-evenly"
+				textAlign="center"
 			>
 				{isLoading ? (
 					<Box alignSelf="center">
@@ -84,6 +103,10 @@ const Weather = ({ darkState, setDarkState }) => {
 						</Box>
 
 						<WeatherDetails details={weatherData} />
+						<Typography variant="h3" color="secondary">
+							Next 5 days:
+						</Typography>
+						<ForeCastDetail forecast={forecastData} />
 					</>
 				)}
 			</Box>

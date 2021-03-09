@@ -23,6 +23,9 @@ function App() {
 			primary: {
 				main: darkState ? "#1fbd23" : "#3964b1",
 			},
+			secondary: {
+				main: darkState ? "#e6c2d1" : "#009688",
+			},
 		},
 	});
 
