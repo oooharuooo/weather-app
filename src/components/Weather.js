@@ -74,7 +74,7 @@ const Weather = ({ darkState, setDarkState }) => {
 	return (
 		<Container maxWidth="md">
 			<Box
-				height="90vh"
+				height="100vh"
 				display="flex"
 				flexDirection="column"
 				borderRadius="50%"
