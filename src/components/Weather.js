@@ -7,11 +7,13 @@ import DarkMode from "./DarkMode";
 import axios from "axios";
 
 import {
+	Grid,
 	Container,
 	Typography,
 	Box,
 	CircularProgress,
 } from "@material-ui/core";
+
 
 const api = {
 	url: "https://api.openweathermap.org/data/2.5/",
@@ -72,45 +74,49 @@ const Weather = ({ darkState, setDarkState }) => {
 	}, [error]);
 
 	return (
-		<Container maxWidth="md">
-			<Box
-				height="100vh"
-				display="flex"
-				flexDirection="column"
-				borderRadius="50%"
-				justifyContent="space-evenly"
-				textAlign="center"
-			>
-				{isLoading ? (
-					<Box alignSelf="center">
-						<CircularProgress />
-					</Box>
-				) : (
-					<>
-						<Box display="flex" flexDirection="row">
-							<Box flexGrow={1} textAlign="center">
-								<Typography variant="h1" color="primary">
-									Weather's App
+		<Grid container direction="column" justify="center" alignItems="center">
+			{isLoading ? (
+				<Box display="flex" height="100vh" alignItems="center">
+					<CircularProgress />
+				</Box>
+			) : (
+				<Grid container direction="column" className="paddingContainer">
+					<Container maxWidth="sm">
+						<Grid item className="paddingTopBottom">
+							<Box display="flex" flexDirection="row">
+								<Box flexGrow={1} textAlign="center">
+									<Typography variant="h1" color="primary">
+										Weather's App
+									</Typography>
+								</Box>
+								<DarkMode darkState={darkState} setDarkState={setDarkState} />
+							</Box>
+						</Grid>
+
+						<Grid item className="paddingTopBottom">
+							<SearchBar setQuery={setQuery} />
+
+							<Box textAlign="center">
+								<Typography variant="h6" color="secondary">
+									{error}
 								</Typography>
 							</Box>
-							<DarkMode darkState={darkState} setDarkState={setDarkState} />
-						</Box>
-						<SearchBar setQuery={setQuery} />
-						<Box textAlign="center">
-							<Typography variant="h6" color="secondary">
-								{error}
-							</Typography>
-						</Box>
+						</Grid>
+					</Container>
 
-						<WeatherDetails details={weatherData} />
-						<Typography variant="h3" color="secondary">
-							Next 5 days:
-						</Typography>
-						<ForeCastDetail forecast={forecastData} />
-					</>
-				)}
-			</Box>
-		</Container>
+					<Container maxWidth="md">
+						<Grid container item spacing={4} alignItems="center">
+							<Grid item xs={12} sm={4} md={5} className="paddingTopBottom">
+								<WeatherDetails details={weatherData} />
+							</Grid>
+							<Grid item xs={12} sm={8} md={7} className="paddingTopBottom">
+								<ForeCastDetail forecast={forecastData} />
+							</Grid>
+						</Grid>
+					</Container>
+				</Grid>
+			)}
+		</Grid>
 	);
 };
 

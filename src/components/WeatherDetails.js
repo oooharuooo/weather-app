@@ -14,7 +14,6 @@ const WeatherDetails = ({ details }) => {
 		<Paper
 			elevation={3}
 			style={{
-				height: "35vh",
 				backgroundImage: `url(${backgroundGenerator(weather, images)})`,
 				backgroundSize: "cover",
 			}}

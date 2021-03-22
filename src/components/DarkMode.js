@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Switch } from "@material-ui/core";
+import { Button, Switch,Box } from "@material-ui/core";
 
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 
@@ -10,7 +10,7 @@ const DarkMode = ({ darkState, setDarkState }) => {
 	};
 
 	return (
-		<div>
+		<Box>
 			<Button
 				variant="contained"
 				style={{
@@ -21,7 +21,7 @@ const DarkMode = ({ darkState, setDarkState }) => {
 				<Switch checked={darkState} onChange={handleThemeChange} />
 				<Brightness4Icon fontSize="default" style={{ color: "white" }} />
 			</Button>
-		</div>
+		</Box>
 	);
 };
 

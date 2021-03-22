@@ -11,7 +11,7 @@ const SingleForeCast = ({ renamedForecast: { day, temp, weather, icon } }) => {
 	};
 	
 	return (
-		<Paper>
+		<Paper elevation={12}>
 			<Box
 				display="flex"
 				flexDirection="column"
@@ -19,7 +19,7 @@ const SingleForeCast = ({ renamedForecast: { day, temp, weather, icon } }) => {
 				justifyContent="space-evenly"
 				textAlign="center"
 			>
-				<Typography variant="h5" color="secondary">
+				<Typography variant="h5" color="secondary" >
 					{dayConverter()}
 				</Typography>
 
@@ -27,10 +27,11 @@ const SingleForeCast = ({ renamedForecast: { day, temp, weather, icon } }) => {
 					{KtoFConverter(temp)}°F
 				</Typography>
 
-				<Typography variant="h5" color="secondary">
+				<Typography variant="h5" color="secondary" >
 					{weather}
 				</Typography>
 				<img
+					
 					src={`http://openweathermap.org/img/wn/${icon}.png`}
 					alt="weatherIcon"
 					style={{ backgroundColor: "#00bcd4", borderRadius: "25px" }}
